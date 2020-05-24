@@ -1,0 +1,24 @@
+genes = ['COI', 'Cytb', '12S', '18S', 'IgA', 'A1BG', 'ZZZ3', 'GDF6', 'CNN1', 'MKNK1']
+spx_counts = [1000, 1000, 5000, 500, 54, 35, 564, 6, 45, 68]
+spy_counts = [1050, 1050, 3452, 315, 45, 45, 345, 5, 78, 15]
+new_entry = ('ALPI', 789)
+new_entry = list(new_entry)
+new_entry[0] = 'ALPG'
+new_entry = tuple(new_entry)
+dx = {} # Empty dictionaries to start
+dy = dict() # This is also a empty dictionary but with the constructor
+for index, gene in enumerate(genes):
+    # we could filter here ...
+    dx[genes[index]] = spx_counts[index]
+    dy[genes[index]] = spy_counts[index]
+dx[new_entry[0]] = new_entry[1]
+big_dict = {'x': dx, 'y': dy}
+for sp, dictionary in big_dict.items():
+    print('The count of CNN1 in species %s is %d' % (sp, dictionary['CNN1']))
+
+filtered = dict(x={}, y=dy)
+for gene, count in big_dict['x'].items():
+    if count >= 100:
+        filtered['x'].update({'gene':count})
+
+
